@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Kelas X PPLG 1</title>
+    <style>
+        :root {
+            --dongker: #1e293b;
+            --abu: #D3D3D3;
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text: #1e293b;
+            --accent: #3b82f6;
+            --danger: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #e0e7ff 0%, #D3D3D3 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 2.2rem; color: var(--dongker); margin-bottom: 5px; }
+
+        /* Navigasi Tab */
+        .tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+
+        .tab-btn {
+            padding: 12px 20px; border: none; background: white; border-radius: 50px;
+            cursor: pointer; font-weight: 600; transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .tab-btn.active { background: var(--dongker); color: white; }
+
+        /* Konten */
+        .content-section { display: none; animation: fadeIn 0.4s ease; }
+        .content-section.active { display: block; }
+
+        .grid-schedule {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .day-card {
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            border-radius: 20px; padding: 20px; border: 1px solid white;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Highlight Hari Ini */
+        .day-card.today { border: 2.5px solid var(--dongker); background: white; }
+
+        .day-card h3 { 
+            border-bottom: 2px solid var(--abu); 
+            padding-bottom: 10px; 
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .today-badge { 
+            display: none; font-size: 0.65rem; background: var(--dongker); 
+            color: white; padding: 3px 10px; border-radius: 10px; 
+        }
+        .day-card.today .today-badge { display: inline-block; }
+
+        ul { list-style: none; }
+        li { padding: 10px 0; border-bottom: 1px dashed #e2e8f0; display: flex; justify-content: space-between; }
+        li:last-child { border-bottom: none; }
+
+        .time { font-size: 0.85rem; color: #64748b; font-weight: 500; }
+
+        /* Form Input Tugas */
+        .input-panel {
+            background: white; padding: 20px; border-radius: 20px;
+            margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .form-group { display: flex; flex-direction: column; gap: 10px; }
+        input { padding: 12px; border: 1px solid #ddd; border-radius: 10px; outline: none; }
+        .add-btn { background: var(--dongker); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+
+        .task-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .task-info { display: flex; gap: 10px; align-items: flex-start; }
+        .task-text.done { text-decoration: line-through; opacity: 0.5; }
+        .del-btn { color: var(--danger); background: none; border: none; cursor: pointer; font-weight: bold; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>X PPLG 1 🚀</h1>
+        <p>Tahun Ajaran 2025/2026</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab(event, 'pelajaran')">📚 Jadwal M1</button>
+        <button class="tab-btn" onclick="showTab(event, 'piket')">🧹 Piket</button>
+        <button class="tab-btn" onclick="showTab(event, 'tugas')">📝 Tugas</button>
+    </div>
+
+    <div id="pelajaran" class="content-section active">
+        <div class="grid-schedule">
+            <div class="day-card" data-day="1">
+                <h3>Senin <span class="today-badge">HARI INI</span></h3>
+                <ul>
+                    <li><span>Upacara</span> <span class="time">06:30-07:10</span></li>
+                    <li><span>Informatika</span> <span class="time">07:10-10:20</span></li>
+                    <li><span>Produktif</span> <span class="time">10:20-13:40</span></li>
+                    <li><span>Sejarah</span> <span class="time">13:40-15:00</span></li>
+                </ul>
+            </div>
+            <div class="day-card" data-day="2">
+                <h3>Selasa <span class="today-badge">HARI INI</span></h3>
+                <ul>
+                    <li><span>Pjok</span> <span class="time">06:30-09:30</span></li>
+                    <li><span>Ipas</span> <span class="time">09:30-11:40</span></li>
+                    <li><span>Produktif</span> <span class="time">12:20-15:00</span></li>
+                </ul>
+            </div>
+            <div class="day-card" data-day="3">
+                <h3>Rabu <span class="today-badge">HARI INI</span></h3>
+                <ul>
+                    <li><span>PPKN</span> <span class="time">06:30-07:50</span></li>
+                    <li><span>PAI</span> <span class="time">07:50-09:50</span></li>
+                    <li><span>Ipas</span> <span class="time">10:20-11:40</span></li>
+                    <li><span>B. Inggris</span> <span class="time">12:20-15:00</span></li>
+                </ul>
+            </div>
+            <div class="day-card" data-day="4">
+                <h3>Kamis <span class="today-badge">HARI INI</span></h3>
+                <ul>
+                    <li><span>Matematika</span> <span class="time">06:30-09:10</span></li>
+                    <li><span>B. Sunda</span> <span class="time">09:10-09:50</span></li>
+                    <li><span>BP/BK</span> <span class="time">10:20-11:40</span></li>
+                    <li><span>Produktif</span> <span class="time">12:20-15:00</span></li>
+                </ul>
+            </div>
+            <div class="day-card" data-day="5">
+                <h3>Jumat <span class="today-badge">HARI INI</span></h3>
+                <ul>
+                    <li><span>B. Indonesia</span> <span class="time">06:30-10:00</span></li>
+                    <li><span>B. Sunda</span> <span class="time">10:30-11:40</span></li>
+                    <li><span>Sholat Jumat</span> <span class="time">11:40-Selesai</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="piket" class="content-section">
+        <div class="grid-schedule">
+            <div class="day-card"><h3>Senin</h3><ul><li>Areeqah, Devit, Arief, Nadiela, M.Fadli, M.Ridwan, Dina, Taofiq</li></ul></div>
+            <div class="day-card"><h3>Selasa</h3><ul><li>Fajrillah, Muhaimin, Syakira, M.Rizky, Septi, Adzhka, Sulthan, Sagiv</li></ul></div>
+            <div class="day-card"><h3>Rabu</h3><ul><li>Abdul, Evan, Lubna, Iman, Synta, Benarizky, M.Zulmi, Aliifah</li></ul></div>
+            <div class="day-card"><h3>Kamis</h3><ul><li>Aulya, Jibrilian, Jaskia, Rizal, Raisya, Rifki, Sabrina, Wafa</li></ul></div>
+            <div class="day-card"><h3>Jumat</h3><ul><li>Ahmad, Bunga, Faisal, Elsa, Hendra, Nessa, Putra, Luthfi</li></ul></div>
+        </div>
+    </div>
+
+    <div id="tugas" class="content-section">
+        <div class="input-panel">
+            <h3>➕ Tambah Tugas</h3>
+            <div class="form-group">
+                <input type="text" id="mapel" placeholder="Mata Pelajaran">
+                <input type="text" id="ket" placeholder="Keterangan Tugas">
+                <input type="text" id="dl" placeholder="Deadline (Contoh: Besok)">
+                <button class="add-btn" onclick="tambahTugas()">Simpan</button>
+            </div>
+        </div>
+        <div class="grid-schedule" id="listTugas">
+            </div>
+    </div>
+</div>
+
+<script>
+    function showTab(e, id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        e.currentTarget.classList.add('active');
+    }
+
+    // Auto highlight hari
+    const hari = new Date().getDay();
+    document.querySelectorAll('#pelajaran .day-card').forEach(card => {
+        if(card.getAttribute('data-day') == hari) card.classList.add('today');
+    });
+
+    // Manajemen Tugas
+    let dataTugas = JSON.parse(localStorage.getItem('tugas_pplg1')) || [];
+
+    function renderTugas() {
+        const container = document.getElementById('listTugas');
+        container.innerHTML = '';
+        dataTugas.forEach((t, i) => {
+            container.innerHTML += `
+                <div class="day-card">
+                    <h3>${t.mapel}</h3>
+                    <div class="task-item">
+                        <div class="task-info">
+                            <input type="checkbox" ${t.cek ? 'checked' : ''} onchange="toggleTugas(${i})">
+                            <div class="task-text ${t.cek ? 'done' : ''}">
+                                <strong>${t.ket}</strong><br>
+                                <small class="time">Deadline: ${t.dl}</small>
+                            </div>
+                        </div>
+                        <button class="del-btn" onclick="hapusTugas(${i})">X</button>
+                    </div>
+                </div>`;
+        });
+    }
+
+    function tambahTugas() {
+        const m = document.getElementById('mapel').value;
+        const k = document.getElementById('ket').value;
+        const d = document.getElementById('dl').value;
+        if(m && k) {
+            dataTugas.push({ mapel: m, ket: k, dl: d, cek: false });
+            updateStorage();
+            document.querySelectorAll('input').forEach(i => i.value = '');
+        }
+    }
+
+    function toggleTugas(i) { dataTugas[i].cek = !dataTugas[i].cek; updateStorage(); }
+    function hapusTugas(i) { if(confirm('Hapus tugas ini?')) { dataTugas.splice(i, 1); updateStorage(); } }
+    function updateStorage() { localStorage.setItem('tugas_pplg1', JSON.stringify(dataTugas)); renderTugas(); }
+
+    window.onload = renderTugas;
+</script>
+
+</body>
+</html>
